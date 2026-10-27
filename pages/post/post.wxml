@@ -1,0 +1,119 @@
+<view class="page page-post">
+  <!-- 标题 -->
+  <view class="card form-card {{focusField === 'title' ? 'focus' : ''}}">
+    <view class="f-label">纠结的事<text class="req">*</text></view>
+    <input
+      class="f-input"
+      placeholder="例：要不要花 1299 换掉旧手机？"
+      placeholder-class="ph"
+      maxlength="40"
+      value="{{title}}"
+      bindinput="onTitle"
+      bindfocus="onFocus"
+      bindblur="onBlur"
+      data-field="title"
+    />
+    <view class="f-count {{title.length > 0 && title.length < minTitle ? 'short' : ''}}">{{title.length < minTitle ? '至少 ' + minTitle + ' 字 · ' : ''}}{{title.length}}/40</view>
+  </view>
+
+  <!-- 纠结理由 -->
+  <view class="card form-card {{focusField === 'detail' ? 'focus' : ''}}">
+    <view class="f-label">纠结理由<text class="req">*</text></view>
+    <textarea
+      class="f-area"
+      placeholder="把背景和顾虑讲清楚，路人才好帮你判断：为什么想做？又在担心什么？"
+      placeholder-class="ph"
+      maxlength="1000"
+      value="{{detail}}"
+      bindinput="onDetail"
+      bindfocus="onFocus"
+      bindblur="onBlur"
+      data-field="detail"
+      auto-height
+    />
+    <view class="f-count {{detail.length > 0 && detail.length < minDetail ? 'short' : ''}}">{{detail.length < minDetail ? '至少 ' + minDetail + ' 字 · ' : ''}}{{detail.length}}/1000</view>
+  </view>
+
+  <!-- B 计划 -->
+  <view class="card form-card {{focusField === 'planB' ? 'focus' : ''}}">
+    <view class="f-label">B 计划<text class="opt">选填</text></view>
+    <textarea
+      class="f-area"
+      placeholder="如果被驳回，你的替代方案是？（写出来会更冷静）"
+      placeholder-class="ph"
+      maxlength="200"
+      value="{{planB}}"
+      bindinput="onPlanB"
+      bindfocus="onFocus"
+      bindblur="onBlur"
+      data-field="planB"
+      auto-height
+    />
+    <view class="f-count">{{planB.length}}/200</view>
+  </view>
+
+  <!-- 预计花费 -->
+  <view class="card form-card {{focusField === 'amount' ? 'focus' : ''}}">
+    <view class="f-label">预计花费<text class="opt">选填</text></view>
+    <view class="amount-box">
+      <text class="amount-yen">¥</text>
+      <input
+        class="f-input amount-input"
+        type="digit"
+        placeholder="涉及花钱就填，驳回后帮你算省了多少"
+        placeholder-class="ph"
+        maxlength="9"
+        value="{{amountText}}"
+        bindinput="onAmount"
+        bindfocus="onFocus"
+        bindblur="onBlur"
+        data-field="amount"
+      />
+      <text class="amount-unit">元</text>
+    </view>
+  </view>
+
+  <!-- 分类 -->
+  <view class="card form-card">
+    <view class="f-label">分类<text class="req">*</text></view>
+    <view class="chips">
+      <view
+        wx:for="{{cats}}"
+        wx:key="*this"
+        class="chip {{category === item ? 'on' : ''}}"
+        hover-class="chip-press"
+        data-v="{{item}}"
+        bindtap="pickCat"
+      >{{item}}</view>
+    </view>
+  </view>
+
+  <!-- 评判时长 -->
+  <view class="card form-card">
+    <view class="f-label">评判时长<text class="req">*</text></view>
+    <view class="chips">
+      <view
+        wx:for="{{durs}}"
+        wx:key="hours"
+        class="chip {{durationHours === item.hours ? 'on' : ''}}"
+        hover-class="chip-press"
+        data-v="{{item.hours}}"
+        bindtap="pickDur"
+      >{{item.label}}</view>
+    </view>
+  </view>
+
+  <!-- 匿名说明 -->
+  <view class="info-card">
+    <view class="info-badge">i</view>
+    <view class="info-text">发布后你将以「一位陌生人」出现，任何人看不到你是谁。评判采用先投后看：投过票或揭晓后，才能看到大家的倾向。</view>
+  </view>
+
+  <!-- 底部固定发布栏：任何滚动位置都可直接发布 -->
+  <view class="post-foot">
+    <view class="foot-hint" wx:if="{{!canSubmit && missingHint}}">
+      <text class="foot-hint-dot"></text>还差：{{missingHint}}
+    </view>
+    <button class="cta-black {{canSubmit ? '' : 'disabled'}}" hover-class="cta-hover" bindtap="submit">发布到广场</button>
+  </view>
+</view>

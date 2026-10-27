@@ -1,0 +1,79 @@
+<view class="page">
+  <!-- 匿名身份 -->
+  <view class="card me-head anim">
+    <view class="me-avatar">?</view>
+    <view class="me-info">
+      <view class="me-name">{{profile.nickname}}</view>
+      <view class="me-sub">匿名身份 · 已陪伴 {{days}} 天</view>
+    </view>
+  </view>
+
+  <!-- 统计 -->
+  <view class="stat-grid anim anim-1">
+    <view class="card stat-mini">
+      <view class="num green">{{stats.published}}</view>
+      <view class="lbl">发布</view>
+    </view>
+    <view class="card stat-mini">
+      <view class="num green">{{stats.votesReceived}}</view>
+      <view class="lbl">收到评判</view>
+    </view>
+    <view class="card stat-mini">
+      <view class="num red">{{stats.helped}}</view>
+      <view class="lbl">帮人拍板</view>
+    </view>
+  </view>
+
+  <!-- 钱包战报：被驳回的金额帖 = 省下的钱 -->
+  <view class="card save-card anim anim-2" wx:if="{{stats.savedTotal > 0}}">
+    <view class="save-main">累计省下 <text class="save-num">¥{{savedLabel}}</text></view>
+    <view class="save-sub">驳回 {{stats.savedCount}} 笔开销 · 路人帮你按住了钱包</view>
+    <view class="save-sub" wx:if="{{stats.approvedSpendTotal > 0}}">另有 ¥{{approvedLabel}} 获批要花，下单前再想三秒</view>
+  </view>
+
+  <!-- 标签页 -->
+  <view class="seg">
+    <view class="seg-i {{tab === 'mine' ? 'on' : ''}}" data-tab="mine" bindtap="switchTab">我的发布</view>
+    <view class="seg-i {{tab === 'votes' ? 'on' : ''}}" data-tab="votes" bindtap="switchTab">我的投票</view>
+  </view>
+
+  <block wx:if="{{tab === 'mine'}}">
+    <choice-card
+      wx:for="{{posts}}"
+      wx:key="id"
+      choice="{{item}}"
+      now="{{now}}"
+      bind:open="onOpen"
+      bind:menu="onMenu"
+    />
+    <empty-state wx:if="{{loaded && !posts.length}}" icon="?" title="还没有发过选择" desc="纠结的时候，别一个人扛">
+      <view class="es-action" hover-class="es-action-press" bindtap="goPost">发起一个选择</view>
+    </empty-state>
+  </block>
+
+  <block wx:else>
+    <choice-card
+      wx:for="{{votes}}"
+      wx:key="id"
+      choice="{{item}}"
+      now="{{now}}"
+      bind:vote="onVote"
+      bind:open="onOpen"
+      bind:menu="onMenu"
+    />
+    <empty-state wx:if="{{loaded && !votes.length}}" icon="?" title="还没投过票" desc="去广场帮别人拿个主意">
+      <view class="es-action" hover-class="es-action-press" bindtap="goPlaza">去广场逛逛</view>
+    </empty-state>
+  </block>
+
+  <!-- 合规页脚 -->
+  <view class="mine-foot anim anim-3">
+    <view class="foot-links">
+      <view class="foot-link" hover-class="hover-dim" bindtap="showPrivacy">隐私保护指引</view>
+      <view class="foot-sep">·</view>
+      <view class="foot-link" hover-class="hover-dim" bindtap="showAbout">关于</view>
+    </view>
+    <view class="foot-note">内容均来自匿名用户 · 请理性判断</view>
+  </view>
+</view>
+

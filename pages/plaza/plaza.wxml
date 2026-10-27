@@ -1,0 +1,70 @@
+<view class="page">
+  <!-- 广场头卡 -->
+  <view class="hero">
+    <view class="hero-deco">?</view>
+    <view class="hero-eyebrow">PUBLIC DECISIONS</view>
+    <view class="hero-t">纠结的事，让路人帮你拍板</view>
+    <view class="hero-s">不用认识对方，也能收到认真、具体的判断。</view>
+    <view class="hero-btns">
+      <button class="hero-btn hero-btn-main" hover-class="hover-dim" bindtap="lookAround">随便看看</button>
+      <button class="hero-btn hero-btn-ghost" hover-class="hover-dim" bindtap="goPost">发一个</button>
+    </view>
+    <view class="hero-stats">发布 <text class="hero-em">{{stats.published}}</text> 条选择，收到 <text class="hero-em">{{stats.votesReceived}}</text> 个评判，帮别人裁决 <text class="hero-em">{{stats.helped}}</text> 条</view>
+  </view>
+
+  <!-- 首屏骨架屏：数据未到前先占位，避免内容跳动 -->
+  <block wx:if="{{!loaded}}">
+    <view class="seg">
+      <view class="seg-i on">最新</view>
+      <view class="seg-i">即将揭晓</view>
+      <view class="seg-i">已揭晓</view>
+    </view>
+    <view class="skel-card" wx:for="{{[1, 2, 3]}}" wx:key="*this">
+      <view class="skel-ava"></view>
+      <view class="skel-body">
+        <view class="skel-line w60"></view>
+        <view class="skel-line w90"></view>
+        <view class="skel-line w40"></view>
+        <view class="skel-bar"></view>
+      </view>
+    </view>
+  </block>
+
+  <block wx:else>
+    <!-- 筛选 -->
+    <view class="seg">
+      <view
+        wx:for="{{filters}}"
+        wx:key="key"
+        class="seg-i {{filter === item.key ? 'on' : ''}}"
+        data-key="{{item.key}}"
+        bindtap="switchFilter"
+      >{{item.name}}</view>
+    </view>
+
+    <!-- 信息流 -->
+    <view class="feed">
+      <choice-card
+        wx:for="{{list}}"
+        wx:key="id"
+        choice="{{item}}"
+        now="{{now}}"
+        bind:vote="onVote"
+        bind:open="onOpen"
+        bind:menu="onMenu"
+      />
+
+      <empty-state
+        wx:if="{{loaded && !list.length}}"
+        icon="?"
+        title="{{filter === 'ended' ? '还没有已揭晓的选择' : (filter === 'ending' ? '没有即将揭晓的选择' : '广场还很安静')}}"
+        desc="{{filter === 'latest' ? '发一个纠结，来当第一个吧' : '换个分类看看，或者自己发一个'}}"
+      />
+      <view class="feed-foot" wx:if="{{list.length}}">{{hasMore ? (loading ? '加载中…' : '上拉加载更多') : '到底啦，去帮别人拍两板'}}</view>
+    </view>
+  </block>
+
+  <!-- 回到顶部 -->
+  <view class="to-top {{showTop ? 'show' : ''}}" hover-class="to-top-hover" bindtap="backTop">顶部</view>
+</view>
+

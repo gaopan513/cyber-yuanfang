@@ -1,0 +1,54 @@
+<view class="page">
+  <view class="anim">
+    <view class="greet">{{greeting}}，{{nickname}}</view>
+    <view class="h1">今天在纠结什么?</view>
+  </view>
+
+  <!-- 总览卡 -->
+  <view class="card total-card anim anim-1">
+    <view class="total-wm">?</view>
+    <view class="total-label">陌生路人已帮你拍板</view>
+    <view class="total-num">{{stats.votesReceived}}<text class="total-unit"> 票</text></view>
+    <view class="total-sub">来自广场上认真而不相识的评判</view>
+    <view class="total-divider"></view>
+    <view class="total-line">{{stats.approved}} 已通过 · {{stats.rejected}} 被驳回 · 采纳率 {{adoptRate}}%</view>
+  </view>
+
+  <!-- 进行中的评判 -->
+  <view class="card pending anim anim-2" hover-class="press" bindtap="goMine">
+    <view class="pending-badge {{pendingCount > 0 ? 'pending-badge-on' : 'pending-badge-done'}}">{{pendingCount > 0 ? pendingCount : ''}}</view>
+    <view class="pending-mid">
+      <view class="pending-t">{{pendingCount > 0 ? pendingCount + ' 个选择评判进行中' : '暂无进行中的评判'}}</view>
+      <view class="pending-s">{{pendingCount > 0 ? '最早一个 ' + pendingFirst + '后揭晓' : '新的评判结果会在这里提醒你'}}</view>
+    </view>
+    <view class="pending-arrow">›</view>
+  </view>
+
+  <!-- 三个统计小卡 -->
+  <view class="stat-grid anim anim-3">
+    <view class="card stat-mini">
+      <view class="num green">{{stats.approved}}</view>
+      <view class="lbl">累计通过</view>
+    </view>
+    <view class="card stat-mini">
+      <view class="num red">{{stats.rejected}}</view>
+      <view class="lbl">累计被驳</view>
+    </view>
+    <view class="card stat-mini">
+      <view class="num dark">{{stats.helped}}</view>
+      <view class="lbl">帮人拍板</view>
+    </view>
+  </view>
+
+  <!-- 纠结语录 -->
+  <view class="info-card anim anim-4">
+    <view class="info-badge">i</view>
+    <view class="info-text">{{quote}}</view>
+  </view>
+
+  <view class="cta-wrap anim anim-5">
+    <button class="cta-black" hover-class="cta-hover" bindtap="goPost">发起一个选择</button>
+  </view>
+  <view class="home-plaza-link anim anim-6" hover-class="hover-dim" bindtap="goPlaza">先去广场帮别人拍两板 ›</view>
+</view>
+

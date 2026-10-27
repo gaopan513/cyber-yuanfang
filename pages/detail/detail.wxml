@@ -1,0 +1,47 @@
+<view class="page" wx:if="{{choice}}">
+  <choice-card choice="{{choice}}" now="{{now}}" bind:vote="onVote" bind:menu="onMenu" />
+
+  <!-- 金额结果横幅：驳回=省下了 / 通过=获批开销 -->
+  <view
+    class="card money-card anim anim-1 {{choice.rejected ? 'money-card-red' : 'money-card-green'}}"
+    wx:if="{{choice.ended && choice.hasAmount && choice.totalVotes > 0}}"
+  >
+    <view class="mc-title" wx:if="{{choice.rejected}}">这次帮你省下 ¥{{choice.amountLabel}}</view>
+    <view class="mc-title" wx:elif="{{choice.approved}}">批准开销 ¥{{choice.amountLabel}}</view>
+    <view class="mc-desc" wx:if="{{choice.rejected}}">路人帮你把钱包按住了，B 计划可以安排上</view>
+    <view class="mc-desc" wx:elif="{{choice.approved}}">路人觉得这钱花得值，去做吧</view>
+  </view>
+
+  <!-- 时间线信息 -->
+  <view class="card meta-card anim anim-2">
+    <view class="meta-row">
+      <text class="meta-k">编号</text>
+      <text class="meta-v">#{{choice.id}}</text>
+    </view>
+    <view class="meta-row" wx:if="{{choice.hasAmount}}">
+      <text class="meta-k">预计花费</text>
+      <text class="meta-v">¥{{choice.amountLabel}}</text>
+    </view>
+    <view class="meta-row">
+      <text class="meta-k">发布时间</text>
+      <text class="meta-v">{{createdFull}}</text>
+    </view>
+    <view class="meta-row">
+      <text class="meta-k">{{choice.ended ? '揭晓时间' : '截止时间'}}</text>
+      <text class="meta-v">{{endFull}}</text>
+    </view>
+    <view class="meta-row">
+      <text class="meta-k">评判时长</text>
+      <text class="meta-v">{{choice.duration_hours}} 小时</text>
+    </view>
+  </view>
+
+  <button class="share-btn" hover-class="hover-dim" open-type="share" wx:if="{{choice.canVote}}">喊朋友来帮 TA 拍板</button>
+</view>
+
+<empty-state
+  wx:elif="{{loaded}}"
+  icon="?"
+  title="内容不存在或已下架"
+  desc="它可能被作者删除，或因多人举报被隐藏"
+/>

@@ -1,0 +1,81 @@
+/* 发布页：底部固定发布栏 + 聚焦高亮 + 金额输入盒 */
+.page-post {
+  /* 给固定发布栏留出空间（栏高约 200rpx + 安全区） */
+  padding-bottom: calc(240rpx + env(safe-area-inset-bottom));
+}
+
+.ph {
+  color: #A9A79F;
+}
+
+/* ---------- 聚焦高亮：绿色光环 + 标签变色 ---------- */
+.form-card {
+  transition: box-shadow 0.2s ease;
+}
+.form-card.focus {
+  box-shadow: 0 0 0 3rpx rgba(47, 93, 80, 0.28), 0 2rpx 12rpx rgba(27, 27, 24, 0.04);
+}
+.form-card.focus .f-label {
+  color: var(--green-ink);
+}
+
+/* ---------- 金额输入盒 ---------- */
+.amount-box {
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+  background: var(--panel);
+  border: 2rpx solid var(--line);
+  border-radius: 18rpx;
+  padding: 20rpx 24rpx;
+}
+.amount-yen {
+  flex: none;
+  color: var(--green);
+  font-size: 34rpx;
+  font-weight: 800;
+}
+.amount-input {
+  flex: 1;
+}
+.amount-unit {
+  flex: none;
+  color: var(--muted);
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+/* ---------- chips 按压反馈 ---------- */
+.chip-press {
+  background: var(--green-tint);
+  opacity: 0.8;
+}
+
+/* ---------- 底部固定发布栏 ---------- */
+.post-foot {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+  background: rgba(253, 253, 251, 0.94);
+  backdrop-filter: blur(24rpx);
+  -webkit-backdrop-filter: blur(24rpx);
+  border-top: 2rpx solid var(--line);
+  padding: 20rpx 32rpx calc(20rpx + env(safe-area-inset-bottom));
+}
+.foot-hint {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  color: var(--muted);
+  font-size: 24rpx;
+  margin: 0 4rpx 14rpx;
+}
+.foot-hint-dot {
+  flex: none;
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+  background: var(--red);
+}

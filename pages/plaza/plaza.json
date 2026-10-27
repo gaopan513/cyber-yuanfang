@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "广场",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
+  "usingComponents": {
+    "choice-card": "/components/choice-card/choice-card",
+    "empty-state": "/components/empty-state/empty-state"
+  }
+}

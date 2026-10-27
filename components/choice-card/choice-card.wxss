@@ -1,0 +1,325 @@
+/* 选择卡片：复刻「钱包请等等」广场卡片视觉 */
+/* 组件样式隔离，需要自带 button 重置 */
+button {
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  line-height: inherit;
+  border-radius: 0;
+}
+button::after {
+  border: none;
+}
+
+/* 卡片入场：列表新增节点时轻微上浮淡入 */
+@keyframes cc-in {
+  from { opacity: 0; transform: translateY(26rpx); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes cc-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+.cc {
+  background: var(--card);
+  border-radius: 28rpx;
+  padding: 30rpx 30rpx 28rpx;
+  margin-bottom: 26rpx;
+  box-shadow: 0 2rpx 12rpx rgba(27, 27, 24, 0.04);
+  animation: cc-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ---- 头部 ---- */
+.cc-head {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+.cc-avatar {
+  flex: none;
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  background: var(--green);
+  color: #ffffff;
+  font-size: 34rpx;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cc-who {
+  flex: 1;
+  min-width: 0;
+}
+.cc-name {
+  font-size: 29rpx;
+  font-weight: 700;
+}
+.cc-time {
+  font-size: 23rpx;
+  color: var(--faint);
+  margin-top: 2rpx;
+}
+.cc-cat {
+  flex: none;
+  font-size: 22rpx;
+  color: var(--green);
+  background: var(--green-tint);
+  border-radius: 999rpx;
+  padding: 6rpx 20rpx;
+  font-weight: 600;
+}
+.cc-amount {
+  flex: none;
+  font-size: 22rpx;
+  color: var(--ink);
+  background: var(--panel);
+  border-radius: 999rpx;
+  padding: 6rpx 18rpx;
+  font-weight: 700;
+}
+.cc-more {
+  flex: none;
+  color: var(--faint);
+  font-size: 34rpx;
+  letter-spacing: 2rpx;
+  /* 扩大热区：菜单是误触重灾区 */
+  padding: 14rpx 12rpx;
+  margin: -14rpx -10rpx -14rpx 2rpx;
+  transition: color 0.15s ease;
+}
+.cc-more-hover {
+  color: var(--ink);
+}
+
+/* ---- 正文 ---- */
+.cc-body {
+  margin-top: 24rpx;
+  background: var(--panel);
+  border: 2rpx solid var(--line);
+  border-radius: 20rpx;
+  padding: 26rpx 26rpx 28rpx;
+}
+.cc-title {
+  font-size: 33rpx;
+  font-weight: 800;
+  line-height: 1.5;
+}
+.cc-row {
+  display: flex;
+  gap: 22rpx;
+  margin-top: 20rpx;
+}
+.cc-lbl {
+  flex: none;
+  color: var(--faint);
+  font-size: 25rpx;
+  padding-top: 4rpx;
+}
+.cc-val {
+  flex: 1;
+  color: #4a4a45;
+  font-size: 27rpx;
+  line-height: 1.75;
+  word-break: break-all;
+}
+.cc-planb {
+  margin-top: 22rpx;
+  background: var(--amber-bg);
+  border-radius: 14rpx;
+  padding: 18rpx 22rpx;
+  color: var(--amber-ink);
+  font-size: 24rpx;
+  line-height: 1.7;
+}
+.cc-planb-lbl {
+  font-weight: 700;
+  margin-right: 14rpx;
+}
+.cc-planb-val {
+  color: var(--amber-ink);
+}
+
+/* ---- 评判区 ---- */
+.cc-vote {
+  margin-top: 26rpx;
+}
+.cc-vote-meta {
+  color: var(--green);
+  font-size: 25rpx;
+  font-weight: 700;
+}
+.cc-vote-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12rpx;
+  font-size: 25rpx;
+  color: var(--ink);
+}
+.cc-remain {
+  color: var(--faint);
+  font-size: 23rpx;
+}
+/* 倒计时紧迫态：剩余不足 2 小时，红色 + 脉冲圆点 */
+.cc-remain.cc-urgent {
+  color: var(--red);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+}
+.cc-remain.cc-urgent::before {
+  content: '';
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+  background: var(--red);
+  animation: cc-pulse 1.1s ease-in-out infinite;
+}
+.cc-track {
+  height: 10rpx;
+  background: #EBE9E1;
+  border-radius: 6rpx;
+  margin-top: 14rpx;
+  overflow: hidden;
+}
+.cc-fill {
+  height: 100%;
+  background: var(--green);
+  border-radius: 6rpx;
+  transition: width 0.4s ease;
+}
+
+/* ---- 结果（先投后看）---- */
+.cc-reveal {
+  animation: cc-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.cc-result {
+  margin-top: 24rpx;
+}
+.cc-r-row {
+  display: flex;
+  align-items: center;
+  gap: 18rpx;
+  margin-top: 14rpx;
+}
+.cc-r-lbl {
+  flex: none;
+  width: 64rpx;
+  font-size: 24rpx;
+  font-weight: 700;
+}
+.cc-r-green { color: var(--green); }
+.cc-r-red { color: var(--red); }
+.cc-r-track {
+  flex: 1;
+  height: 14rpx;
+  background: #F0EEE7;
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+.cc-r-fill {
+  height: 100%;
+  border-radius: 8rpx;
+  transition: width 0.4s ease;
+}
+.cc-r-fill-g { background: var(--green); }
+.cc-r-fill-r { background: #D9908A; }
+.cc-r-num {
+  flex: none;
+  width: 168rpx;
+  text-align: right;
+  color: var(--muted);
+  font-size: 22rpx;
+}
+.cc-verdict {
+  margin-top: 22rpx;
+  background: var(--green-tint);
+  color: var(--green-ink);
+  border-radius: 14rpx;
+  padding: 18rpx 22rpx;
+  font-size: 25rpx;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+.cc-verdict-txt {
+  flex: 1;
+  min-width: 0;
+}
+.cc-verdict-red {
+  background: var(--red-tint);
+  color: var(--red);
+}
+.cc-money-badge {
+  flex: none;
+  font-size: 22rpx;
+  font-weight: 800;
+  color: var(--red);
+  background: #ffffff;
+  border-radius: 999rpx;
+  padding: 8rpx 18rpx;
+}
+.cc-money-badge-green {
+  color: var(--green);
+}
+
+/* ---- 投票按钮 ---- */
+.cc-actions {
+  display: flex;
+  gap: 22rpx;
+  margin-top: 28rpx;
+}
+.cc-btn {
+  flex: 1;
+  border-radius: 18rpx;
+  padding: 24rpx 0;
+  text-align: center;
+  font-size: 30rpx;
+  font-weight: 800;
+  letter-spacing: 2rpx;
+}
+.cc-btn-approve {
+  background: var(--green);
+  color: #ffffff;
+}
+.cc-btn-reject {
+  background: var(--red-tint);
+  color: var(--red);
+}
+.cc-btn-hover {
+  opacity: 0.9;
+  transform: scale(0.97);
+}
+.cc-btn {
+  transition: transform 0.12s ease, opacity 0.12s ease;
+}
+.cc-hint {
+  margin: 24rpx auto 0;
+  width: -webkit-fit-content;
+  width: fit-content;
+  max-width: 100%;
+  text-align: center;
+  color: var(--muted);
+  font-size: 23rpx;
+  line-height: 1.6;
+  background: var(--panel);
+  border-radius: 999rpx;
+  padding: 12rpx 26rpx;
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+}
+.cc-hint-ico {
+  flex: none;
+  font-size: 20rpx;
+  font-weight: 700;
+  color: var(--green);
+  background: var(--green-tint);
+  border-radius: 999rpx;
+  padding: 4rpx 14rpx;
+  letter-spacing: 1rpx;
+}

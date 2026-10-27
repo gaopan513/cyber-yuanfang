@@ -1,0 +1,93 @@
+.me-head {
+  display: flex;
+  align-items: center;
+  gap: 26rpx;
+  padding: 36rpx 32rpx;
+}
+.me-avatar {
+  flex: none;
+  width: 108rpx;
+  height: 108rpx;
+  border-radius: 50%;
+  background: var(--green);
+  color: #ffffff;
+  font-size: 52rpx;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* 外圈光晕，强化「匿名身份」的仪式感 */
+  box-shadow: 0 0 0 10rpx var(--green-tint);
+}
+.me-name {
+  font-size: 36rpx;
+  font-weight: 800;
+}
+.me-sub {
+  color: var(--muted);
+  font-size: 25rpx;
+  margin-top: 8rpx;
+}
+
+/* 钱包战报 */
+.save-card {
+  padding: 30rpx 32rpx;
+  margin-bottom: 24rpx;
+}
+.save-main {
+  font-size: 29rpx;
+  font-weight: 700;
+}
+.save-num {
+  color: var(--green);
+  font-size: 44rpx;
+  font-weight: 800;
+  margin-left: 4rpx;
+}
+.save-sub {
+  margin-top: 10rpx;
+  color: var(--muted);
+  font-size: 24rpx;
+}
+
+.es-action {
+  margin-top: 36rpx;
+  background: var(--ink);
+  color: #ffffff;
+  font-size: 28rpx;
+  font-weight: 700;
+  border-radius: 999rpx;
+  padding: 20rpx 56rpx;
+  transition: transform 0.12s ease, opacity 0.12s ease;
+}
+.es-action-press {
+  opacity: 0.88;
+  transform: scale(0.97);
+}
+
+/* 合规页脚 */
+.mine-foot {
+  margin-top: 56rpx;
+  padding-bottom: 10rpx;
+  text-align: center;
+}
+.foot-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20rpx;
+}
+.foot-link {
+  color: var(--muted);
+  font-size: 24rpx;
+  padding: 8rpx 6rpx;
+}
+.foot-sep {
+  color: var(--faint);
+  font-size: 24rpx;
+}
+.foot-note {
+  margin-top: 8rpx;
+  color: var(--faint);
+  font-size: 22rpx;
+}

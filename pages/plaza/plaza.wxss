@@ -1,0 +1,98 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+  border-radius: 32rpx;
+  padding: 40rpx 36rpx 34rpx;
+  background: linear-gradient(120deg, #ebf1ec 0%, #f4f2e7 100%);
+  box-shadow: 0 2rpx 12rpx rgba(27, 27, 24, 0.04);
+}
+/* 右上角匿名「?」水印装饰 */
+.hero-deco {
+  position: absolute;
+  right: -14rpx;
+  top: -30rpx;
+  font-size: 200rpx;
+  font-weight: 800;
+  color: rgba(47, 93, 80, 0.07);
+  transform: rotate(12deg);
+  pointer-events: none;
+  line-height: 1;
+}
+.hero-eyebrow {
+  font-size: 20rpx;
+  letter-spacing: 6rpx;
+  color: var(--green);
+  font-weight: 700;
+}
+.hero-t {
+  font-size: 40rpx;
+  font-weight: 800;
+  margin-top: 14rpx;
+  line-height: 1.35;
+}
+.hero-s {
+  font-size: 25rpx;
+  color: var(--muted);
+  margin-top: 10rpx;
+}
+.hero-btns {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 30rpx;
+}
+.hero-btn {
+  border-radius: 999rpx;
+  font-size: 28rpx;
+  font-weight: 700;
+  padding: 18rpx 46rpx;
+  text-align: center;
+}
+.hero-btn-main {
+  background: var(--green);
+  color: #ffffff;
+}
+.hero-btn-ghost {
+  background: var(--card);
+  color: var(--ink);
+}
+.hero-stats {
+  margin-top: 28rpx;
+  font-size: 24rpx;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.hero-em {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.to-top {
+  position: fixed;
+  right: 36rpx;
+  bottom: 220rpx;
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 50%;
+  background: var(--green);
+  color: #ffffff;
+  font-size: 24rpx;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8rpx 24rpx rgba(47, 93, 80, 0.35);
+  opacity: 0;
+  transform: translateY(20rpx);
+  transition: all 0.25s ease;
+  pointer-events: none;
+  z-index: 10;
+}
+.to-top.show {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+.to-top-hover {
+  transform: scale(0.94);
+  opacity: 0.9;
+}

@@ -1,0 +1,70 @@
+<view class="cc">
+  <!-- 头部：匿名头像 + 时间 + 分类 + 菜单 -->
+  <view class="cc-head">
+    <view class="cc-avatar">?</view>
+    <view class="cc-who">
+      <view class="cc-name">{{choice.isMine ? '我' : '一位陌生人'}}</view>
+      <view class="cc-time">{{choice.createdLabel}}</view>
+    </view>
+    <view class="cc-cat">{{choice.category}}</view>
+    <view class="cc-amount" wx:if="{{choice.hasAmount}}">¥{{choice.amountLabel}}</view>
+    <view class="cc-more" hover-class="cc-more-hover" catchtap="onMenu">···</view>
+  </view>
+
+  <!-- 正文：标题 + 纠结理由 + B 计划 -->
+  <view class="cc-body" bindtap="onOpen">
+    <view class="cc-title">{{choice.title}}</view>
+    <view class="cc-row">
+      <text class="cc-lbl">纠结理由</text>
+      <text class="cc-val">{{choice.detail}}</text>
+    </view>
+    <view class="cc-planb" wx:if="{{choice.plan_b}}">
+      <text class="cc-planb-lbl">B 计划</text>
+      <text class="cc-planb-val">{{choice.plan_b}}</text>
+    </view>
+  </view>
+
+  <!-- 评判区：倒计时 + 表态数 + （先投后看）结果 -->
+  <view class="cc-vote" bindtap="onOpen">
+    <view class="cc-vote-meta">{{liveEnded ? '评判已揭晓' : '众人评判 · ' + endLabel}}</view>
+    <view class="cc-vote-line">
+      <text class="cc-votes">已有 {{choice.totalVotes}} 人表态</text>
+      <text class="cc-remain {{urgent ? 'cc-urgent' : ''}}">{{remain}}</text>
+    </view>
+    <view class="cc-track">
+      <view class="cc-fill" style="width: {{progress}}%;"></view>
+    </view>
+
+    <block wx:if="{{choice.revealResults}}">
+      <view class="cc-result cc-reveal">
+        <view class="cc-r-row">
+          <text class="cc-r-lbl cc-r-green">通过</text>
+          <view class="cc-r-track">
+            <view class="cc-r-fill cc-r-fill-g" style="width: {{choice.approvePct}}%;"></view>
+          </view>
+          <text class="cc-r-num">{{choice.approve_count}} 票 · {{choice.approvePct}}%</text>
+        </view>
+        <view class="cc-r-row">
+          <text class="cc-r-lbl cc-r-red">驳回</text>
+          <view class="cc-r-track">
+            <view class="cc-r-fill cc-r-fill-r" style="width: {{choice.rejectPct}}%;"></view>
+          </view>
+          <text class="cc-r-num">{{choice.reject_count}} 票 · {{choice.rejectPct}}%</text>
+        </view>
+      </view>
+      <view class="cc-verdict cc-reveal {{choice.rejected ? 'cc-verdict-red' : ''}}" wx:if="{{liveEnded}}">
+        <view class="cc-verdict-txt">最终：{{choice.verdict}}</view>
+        <view class="cc-money-badge" wx:if="{{choice.savedYuan > 0}}">省了 ¥{{choice.amountLabel}}</view>
+        <view class="cc-money-badge cc-money-badge-green" wx:if="{{choice.willSpendYuan > 0}}">要花 ¥{{choice.amountLabel}}</view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 投票按钮 / 状态提示 -->
+  <view class="cc-actions" wx:if="{{choice.canVote}}">
+    <button class="cc-btn cc-btn-approve" hover-class="cc-btn-hover" catchtap="onApprove">通过</button>
+    <button class="cc-btn cc-btn-reject" hover-class="cc-btn-hover" catchtap="onReject">驳回</button>
+  </view>
+  <view class="cc-hint" wx:elif="{{choice.isMine && !liveEnded}}"><text class="cc-hint-ico">先投后看</text>你的选择正在被评判，揭晓前你看不到倾向</view>
+  <view class="cc-hint" wx:elif="{{choice.myVote && !liveEnded}}"><text class="cc-hint-ico">先投后看</text>你已投「{{choice.myVote === 'approve' ? '通过' : '驳回'}}」，保持独立判断</view>
+</view>

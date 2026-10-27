@@ -1,0 +1,38 @@
+.es {
+  padding: 110rpx 40rpx 90rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+/* 图标轻微呼吸浮动，让空状态「活」一点 */
+@keyframes es-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10rpx); }
+}
+.es-icon {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+  background: var(--green-tint);
+  color: var(--green);
+  font-size: 64rpx;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.85;
+  animation: es-float 3s ease-in-out infinite;
+}
+.es-title {
+  margin-top: 40rpx;
+  font-size: 34rpx;
+  font-weight: 800;
+}
+.es-desc {
+  margin-top: 14rpx;
+  color: var(--muted);
+  font-size: 26rpx;
+  line-height: 1.7;
+  max-width: 460rpx;
+}

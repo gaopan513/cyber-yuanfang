@@ -1,0 +1,59 @@
+.meta-card {
+  margin-top: 8rpx;
+  padding: 12rpx 32rpx;
+}
+
+/* 金额结果横幅 */
+.money-card {
+  margin-top: 8rpx;
+  padding: 30rpx 32rpx;
+}
+.money-card-red {
+  background: var(--red-tint);
+}
+.money-card-green {
+  background: var(--green-tint);
+}
+.mc-title {
+  font-size: 32rpx;
+  font-weight: 800;
+  color: var(--red);
+}
+.money-card-green .mc-title {
+  color: var(--green);
+}
+.mc-desc {
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  color: var(--muted);
+}
+.meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22rpx 0;
+  border-bottom: 2rpx solid var(--line);
+  font-size: 26rpx;
+}
+.meta-row:last-child {
+  border-bottom: none;
+}
+.meta-k {
+  color: var(--muted);
+}
+.meta-v {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.share-btn {
+  margin-top: 32rpx;
+  border: 3rpx solid var(--green);
+  color: var(--green);
+  background: transparent;
+  border-radius: 999rpx;
+  font-size: 29rpx;
+  font-weight: 700;
+  padding: 22rpx 0;
+  text-align: center;
+}

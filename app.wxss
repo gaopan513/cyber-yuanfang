@@ -1,0 +1,345 @@
+/**
+ * 赛博元芳 · 全局样式
+ * 设计语言对齐「钱包请等等」：暖白底 / 墨绿主色 / 砖红点缀 / 大圆角白卡片
+ */
+page {
+  --bg: #F6F5F2;
+  --card: #FFFFFF;
+  --ink: #1B1B18;
+  --muted: #71716D;
+  --faint: #A6A49D;
+  --green: #2F5D50;
+  --green-soft: #3B675A;
+  --green-tint: #EAF1ED;
+  --green-ink: #2E5A4C;
+  --red: #B04A41;
+  --red-tint: #F7E9E6;
+  --amber-bg: #F7F1DE;
+  --amber-ink: #93803F;
+  --line: #ECEAE2;
+  --panel: #F8F7F3;
+
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 28rpx;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", "Microsoft YaHei", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  padding: 28rpx 32rpx calc(90rpx + env(safe-area-inset-bottom));
+  box-sizing: border-box;
+}
+
+/* ---------- 入场动画（transform+opacity，不触发重排） ---------- */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(26rpx); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.anim {
+  animation: fade-up 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.anim-1 { animation-delay: 0.04s; }
+.anim-2 { animation-delay: 0.09s; }
+.anim-3 { animation-delay: 0.14s; }
+.anim-4 { animation-delay: 0.19s; }
+.anim-5 { animation-delay: 0.24s; }
+.anim-6 { animation-delay: 0.3s; }
+
+/* 统一按压反馈：轻微下沉 + 降透明，transform 不影响布局 */
+.press {
+  transform: scale(0.98);
+  opacity: 0.85;
+  transition: transform 0.12s ease, opacity 0.12s ease;
+}
+
+/* ---------- 骨架屏（首屏加载占位，避免内容跳动） ---------- */
+@keyframes shimmer {
+  0% { background-position: -400rpx 0; }
+  100% { background-position: 400rpx 0; }
+}
+.skel-card {
+  background: var(--card);
+  border-radius: 28rpx;
+  padding: 30rpx;
+  margin-bottom: 26rpx;
+  box-shadow: 0 2rpx 12rpx rgba(27, 27, 24, 0.04);
+  display: flex;
+  gap: 20rpx;
+}
+.skel-ava {
+  flex: none;
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  background: linear-gradient(90deg, #EFEEE8 25%, #F7F6F1 45%, #EFEEE8 65%);
+  background-size: 800rpx 100%;
+  animation: shimmer 1.3s linear infinite;
+}
+.skel-body {
+  flex: 1;
+  min-width: 0;
+}
+.skel-line {
+  height: 24rpx;
+  border-radius: 8rpx;
+  margin-bottom: 18rpx;
+  background: linear-gradient(90deg, #EFEEE8 25%, #F7F6F1 45%, #EFEEE8 65%);
+  background-size: 800rpx 100%;
+  animation: shimmer 1.3s linear infinite;
+}
+.skel-line.w60 { width: 60%; }
+.skel-line.w90 { width: 90%; }
+.skel-line.w40 { width: 40%; margin-bottom: 0; }
+.skel-bar {
+  height: 10rpx;
+  border-radius: 6rpx;
+  margin-top: 26rpx;
+  background: linear-gradient(90deg, #EFEEE8 25%, #F7F6F1 45%, #EFEEE8 65%);
+  background-size: 800rpx 100%;
+  animation: shimmer 1.3s linear infinite;
+}
+
+/* 弱动效偏好：尊重系统「减少动态效果」设置 */
+@media (prefers-reduced-motion: reduce) {
+  .anim,
+  .anim-1, .anim-2, .anim-3, .anim-4, .anim-5, .anim-6 {
+    animation: none;
+  }
+}
+
+/* ---------- 卡片 ---------- */
+.card {
+  background: var(--card);
+  border-radius: 28rpx;
+  padding: 32rpx;
+  box-shadow: 0 2rpx 12rpx rgba(27, 27, 24, 0.04);
+  box-sizing: border-box;
+}
+
+/* ---------- 文字 ---------- */
+.h1 {
+  font-size: 52rpx;
+  font-weight: 800;
+  letter-spacing: 0.5rpx;
+  line-height: 1.3;
+}
+.greet {
+  color: var(--muted);
+  font-size: 28rpx;
+  margin-bottom: 6rpx;
+}
+.section-t {
+  font-size: 34rpx;
+  font-weight: 700;
+  margin: 40rpx 4rpx 24rpx;
+}
+
+/* ---------- 按钮 ---------- */
+button {
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  line-height: inherit;
+  border-radius: 0;
+  font-weight: inherit;
+}
+button::after {
+  border: none;
+}
+.cta-wrap {
+  margin-top: 40rpx;
+}
+.cta-black {
+  background: var(--ink);
+  color: #FFFFFF;
+  font-size: 32rpx;
+  font-weight: 700;
+  letter-spacing: 2rpx;
+  border-radius: 20rpx;
+  padding: 28rpx 0;
+  width: 100%;
+  text-align: center;
+  transition: transform 0.12s ease, opacity 0.2s ease;
+}
+.cta-black.disabled {
+  opacity: 0.35;
+}
+.cta-hover {
+  opacity: 0.88;
+  transform: scale(0.985);
+}
+
+/* ---------- 信息提示卡 ---------- */
+.info-card {
+  background: var(--green-tint);
+  border-radius: 24rpx;
+  padding: 28rpx;
+  display: flex;
+  gap: 20rpx;
+  align-items: flex-start;
+  margin-top: 28rpx;
+}
+.info-badge {
+  flex: none;
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 12rpx;
+  background: var(--green);
+  color: #FFFFFF;
+  font-size: 26rpx;
+  font-weight: 700;
+  font-style: italic;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.info-text {
+  color: var(--green-ink);
+  font-size: 26rpx;
+  line-height: 1.75;
+}
+
+/* ---------- 统计小卡 ---------- */
+.stat-grid {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 28rpx;
+}
+.stat-mini {
+  flex: 1;
+  text-align: center;
+  padding: 30rpx 0 26rpx;
+}
+.stat-mini .num {
+  font-size: 46rpx;
+  font-weight: 800;
+  line-height: 1.2;
+}
+.num.green { color: var(--green); }
+.num.red { color: var(--red); }
+.num.dark { color: var(--ink); }
+.stat-mini .lbl {
+  color: var(--muted);
+  font-size: 24rpx;
+  margin-top: 8rpx;
+}
+
+/* ---------- 分段筛选 ---------- */
+.seg {
+  display: flex;
+  gap: 40rpx;
+  margin: 40rpx 6rpx 26rpx;
+}
+.seg-i {
+  font-size: 30rpx;
+  color: var(--faint);
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 12rpx;
+  transition: color 0.2s ease;
+}
+.seg-i.on {
+  color: var(--ink);
+  font-weight: 800;
+}
+.seg-i.on::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  width: 34rpx;
+  height: 6rpx;
+  border-radius: 4rpx;
+  background: var(--green);
+}
+
+/* ---------- 表单 ---------- */
+.form-card {
+  margin-bottom: 24rpx;
+}
+.f-label {
+  font-size: 28rpx;
+  font-weight: 700;
+  margin-bottom: 20rpx;
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+.f-label .req {
+  color: var(--red);
+  font-weight: 600;
+}
+.f-label .opt {
+  font-size: 22rpx;
+  color: var(--faint);
+  background: var(--panel);
+  border-radius: 999rpx;
+  padding: 4rpx 16rpx;
+  font-weight: 500;
+}
+.f-input {
+  font-size: 30rpx;
+  padding: 8rpx 0 24rpx;
+}
+.f-area {
+  width: 100%;
+  font-size: 30rpx;
+  line-height: 1.7;
+  min-height: 120rpx;
+}
+.f-count {
+  text-align: right;
+  color: var(--faint);
+  font-size: 22rpx;
+  margin-top: 8rpx;
+}
+.f-count.short {
+  color: var(--red);
+}
+.amount-row {
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+}
+.amount-input {
+  flex: 1;
+}
+.amount-unit {
+  flex: none;
+  color: var(--muted);
+  font-size: 28rpx;
+  font-weight: 600;
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18rpx;
+}
+.chip {
+  font-size: 26rpx;
+  color: var(--muted);
+  background: var(--panel);
+  border: 2rpx solid transparent;
+  border-radius: 999rpx;
+  padding: 12rpx 30rpx;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.chip.on {
+  color: var(--green);
+  background: var(--green-tint);
+  border-color: var(--green);
+  font-weight: 700;
+}
+
+/* ---------- 通用反馈 ---------- */
+.feed-foot {
+  text-align: center;
+  color: var(--faint);
+  font-size: 24rpx;
+  padding: 32rpx 0 8rpx;
+}
+.hover-dim {
+  opacity: 0.85;
+}

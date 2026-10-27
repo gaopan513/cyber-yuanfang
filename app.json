@@ -1,0 +1,51 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/plaza/plaza",
+    "pages/post/post",
+    "pages/mine/mine",
+    "pages/detail/detail"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#F6F5F2",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "赛博元芳",
+    "backgroundColor": "#F6F5F2",
+    "backgroundTextStyle": "dark"
+  },
+  "tabBar": {
+    "color": "#A8A69F",
+    "selectedColor": "#2F5D50",
+    "backgroundColor": "#FDFDFB",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "assets/tabbar/home.png",
+        "selectedIconPath": "assets/tabbar/home-active.png"
+      },
+      {
+        "pagePath": "pages/plaza/plaza",
+        "text": "广场",
+        "iconPath": "assets/tabbar/plaza.png",
+        "selectedIconPath": "assets/tabbar/plaza-active.png"
+      },
+      {
+        "pagePath": "pages/post/post",
+        "text": "发布",
+        "iconPath": "assets/tabbar/post.png",
+        "selectedIconPath": "assets/tabbar/post-active.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "assets/tabbar/mine.png",
+        "selectedIconPath": "assets/tabbar/mine-active.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

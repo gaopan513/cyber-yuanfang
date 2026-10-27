@@ -1,0 +1,113 @@
+.total-card {
+  position: relative;
+  overflow: hidden;
+  margin-top: 28rpx;
+  padding: 36rpx 32rpx 30rpx;
+}
+/* 右上角匿名「?」水印 */
+.total-wm {
+  position: absolute;
+  right: -10rpx;
+  top: -36rpx;
+  font-size: 180rpx;
+  font-weight: 800;
+  color: rgba(47, 93, 80, 0.06);
+  transform: rotate(12deg);
+  line-height: 1;
+  pointer-events: none;
+}
+.total-label {
+  font-size: 26rpx;
+  color: var(--muted);
+}
+.total-num {
+  font-size: 88rpx;
+  font-weight: 800;
+  line-height: 1.15;
+  margin-top: 8rpx;
+}
+.total-unit {
+  font-size: 30rpx;
+  color: var(--muted);
+  font-weight: 600;
+  margin-left: 8rpx;
+}
+.total-sub {
+  color: var(--faint);
+  font-size: 24rpx;
+  margin-top: 4rpx;
+}
+.total-divider {
+  height: 2rpx;
+  background: var(--line);
+  margin: 26rpx 0 22rpx;
+}
+.total-line {
+  color: var(--muted);
+  font-size: 25rpx;
+}
+
+.pending {
+  margin-top: 28rpx;
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+  padding: 30rpx 32rpx;
+}
+.pending-badge {
+  flex: none;
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 18rpx;
+  background: var(--green-tint);
+  color: var(--green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 34rpx;
+}
+.pending-badge-on {
+  background: var(--green);
+  color: #ffffff;
+}
+/* 暂无进行中：CSS 对勾（替代文本 ✓，视觉更稳） */
+.pending-badge-done {
+  background: var(--green-tint);
+  color: var(--green);
+}
+.pending-badge-done::before {
+  content: '';
+  width: 24rpx;
+  height: 13rpx;
+  border-left: 5rpx solid currentColor;
+  border-bottom: 5rpx solid currentColor;
+  border-radius: 2rpx;
+  transform: rotate(-45deg) translateY(-2rpx);
+}
+.pending-mid {
+  flex: 1;
+  min-width: 0;
+}
+.pending-t {
+  font-size: 30rpx;
+  font-weight: 700;
+}
+.pending-s {
+  font-size: 24rpx;
+  color: var(--muted);
+  margin-top: 4rpx;
+}
+.pending-arrow {
+  color: var(--faint);
+  font-size: 44rpx;
+  line-height: 1;
+}
+
+.home-plaza-link {
+  text-align: center;
+  color: var(--muted);
+  font-size: 26rpx;
+  margin-top: 34rpx;
+  padding: 8rpx;
+}
