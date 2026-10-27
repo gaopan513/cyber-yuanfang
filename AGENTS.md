@@ -6,7 +6,7 @@
 
 ## 运行与检查
 
-- 微信开发者工具导入项目根目录，编译预览；AppID 在 `project.config.json`，当前已有具体配置，使用自己的应用前先核对。
+- 微信开发者工具导入项目根目录，编译预览；`project.config.json` 的 AppID 统一使用 `touristappid` 占位。真实应用联调或发布时在本地填写自己的 AppID，提交前恢复占位值。
 - 数据层冒烟检查：在项目根目录运行 `node tools/smoke_test.js`，使用内存模拟 `wx` 存储，不操作开发者工具中的真实数据。
 - 修改某个 JavaScript 文件后，可用 `node --check path/to/file.js` 检查语法。界面、页面配置或交互变更还需在微信开发者工具中验证。
 - 已提交 8 张 tabBar PNG，无需重新生成即可运行。仅修改图标时才需要 Python + Pillow，执行 `python gen_icons.py` 会重写对应图片。
@@ -48,7 +48,7 @@
 
 - 根目录 `.gitignore` 排除 `.workbuddy/`、`.codegraph/`、`project.private.config.json`、真实环境变量、依赖、Python 缓存和日志。禁止把工具记忆、登录昵称、个人路径、截图操作记录、令牌或用户存储导出复制到可提交文件中。
 - `.env.example`、`.env.*.example` 可提交，但只放占位值。原生小程序当前不自动读取 `.env`；它不是前端保密机制。AppSecret、云服务私钥等凭证必须留在后端环境。
-- `project.config.json` 中的 AppID 是应用标识，可以公开；文档使用占位说明，不复制实际值。若公开仓库要隐藏应用关联，另行使用占位 AppID，不能把整份必要工程配置一并忽略。
+- `project.config.json` 中的 AppID 虽是应用标识而非密钥，本项目为避免应用关联统一提交 `touristappid` 占位值。真实 AppID 仅用于本地联调和发布，不写入文档，也不能通过忽略整份必要工程配置来隐藏它。
 - `packOptions.ignore` 只控制微信小程序打包，Git 提交由 `.gitignore` 控制。README、AGENTS 等开发文档已按文件加入打包排除列表；新增开发辅助文件后同步核对打包清单，保留现有排除项，不忽略页面、组件和图标资源。
 - 初始化 Git 仓库后，用 `git check-ignore -v` 核验敏感路径，提交前查看 `git status --short` 与 `git diff --cached --name-only`；不要用强制加入文件绕过隐私规则。
 

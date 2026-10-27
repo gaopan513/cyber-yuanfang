@@ -74,7 +74,7 @@
 ## 运行
 
 1. 安装微信开发者工具，导入项目根目录，编译预览；无需执行 `npm install`。
-2. `project.config.json` 当前已有具体 AppID，并配置 `libVersion` 为 `3.7.12`。克隆后核对 AppID，按自己的应用修改；文档不复制实际标识。AppID 不是 AppSecret。
+2. `project.config.json` 使用 `touristappid` 占位，并配置 `libVersion` 为 `3.7.12`。真实应用联调或发布时，在本地填写自己的 AppID；提交代码前恢复占位值，避免暴露应用关联。AppID 不是 AppSecret。
 3. 需要命令行检查时安装 Node.js，在项目根目录运行：
 
 ```bash
@@ -90,7 +90,7 @@ node --check services/choices.js
 
 根目录 [.gitignore](.gitignore) 已排除 AI 工具记忆和代码索引（`.workbuddy/`、`.codegraph/`）、微信开发者工具本机配置 `project.private.config.json`、真实 `.env` 配置、依赖、Python 字节码缓存和运行日志。不要把其中的个人昵称、登录信息、本机路径、截图记录或用户数据导出复制到 README 和源码中。
 
-`project.config.json` 与其中的 AppID 仍会提交；是否公开应用关联应在发布前确认。`.env.example` 和 `.env.*.example` 只放占位值；当前原生小程序不会自动读取 `.env`，也不能通过客户端文件安全保存 AppSecret。
+`project.config.json` 仍会提交，AppID 统一保留为 `touristappid` 占位。`.env.example` 和 `.env.*.example` 只放占位值；当前原生小程序不会自动读取 `.env`，也不能通过客户端文件安全保存 AppSecret。
 
 初始化 Git 仓库后，可在项目根目录核验：
 
